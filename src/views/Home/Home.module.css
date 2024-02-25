@@ -8,7 +8,8 @@
   background: #fff;
 }
 
-.listHeader {
+.listHeader,
+.listFooter {
   display: flex;
   align-items: center;
   justify-content: space-between;
