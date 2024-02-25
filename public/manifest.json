@@ -18,6 +18,21 @@
       "sizes": "512x512"
     }
   ],
+  "screenshots": [
+    {
+      "src": "preview.png",
+      "sizes": "640x320",
+      "type": "image/gif",
+      "form_factor": "wide",
+      "label": "Beer Wiki"
+    },
+    {
+      "src": "preview.png",
+      "sizes": "640x320",
+      "type": "image/gif",
+      "label": "Beer Wiki"
+    }
+  ],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
