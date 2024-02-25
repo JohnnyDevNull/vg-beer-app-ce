@@ -1,0 +1,18 @@
+.listHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.listFooter {
+  display: flex;
+  justify-content: center;
+}
+
+.typeFormControlWrapper {
+  width: 125px;
+}
+
+.sortFormControlWrapper {
+  width: 100px;
+}
