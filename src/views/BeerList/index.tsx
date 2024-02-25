@@ -70,7 +70,7 @@ const BeerList = () => {
   return (
     <article>
       <section>
-        <header>
+        <header data-cy="beer-list-header">
           <h1>BeerList page</h1>
         </header>
         <main>
@@ -79,32 +79,37 @@ const BeerList = () => {
               label="Name"
               variant="outlined"
               value={listFilter.name}
-              onChange={(event) => onTextFieldChange(event, 'name')} />
+              onChange={(event) => onTextFieldChange(event, 'name')}
+              data-cy="filter-name-input" />
             <TextField
               label="City"
               variant="outlined"
               value={listFilter.city}
-              onChange={(event) => onTextFieldChange(event, 'city')} />
+              onChange={(event) => onTextFieldChange(event, 'city')}
+              data-cy="filter-city-input" />
             <TextField
               label="State"
               variant="outlined"
               value={listFilter.state}
-              onChange={(event) => onTextFieldChange(event, 'state')} />
+              onChange={(event) => onTextFieldChange(event, 'state')}
+              data-cy="filter-state-input" />
             <TextField
               label="Postal"
               variant="outlined"
               value={listFilter.postal}
-              onChange={(event) => onTextFieldChange(event, 'postal')} />
+              onChange={(event) => onTextFieldChange(event, 'postal')}
+              data-cy="filter-postal-input" />
 
             <div className={styles.typeFormControlWrapper}>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Type</InputLabel>
+              <InputLabel id="filter-type-select-label">Type</InputLabel>
               <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
+                labelId="filter-type-select-label"
+                id="filter-type-select"
                 value={listFilter.type}
                 label="Type"
                 onChange={(event) => onSelectFieldChange(event, 'type')}
+                data-cy="filter-type-select"
               >
                 <MenuItem value="micro">micro</MenuItem>
                 <MenuItem value="nano">nano</MenuItem>
@@ -122,13 +127,14 @@ const BeerList = () => {
 
             <div className={styles.sortFormControlWrapper}>
               <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Sort</InputLabel>
+                <InputLabel id="filter-sort-select-label">Sort</InputLabel>
                 <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
+                  labelId="filter-sort-select-label"
+                  id="filter-sort-select"
                   value={listFilter.sort}
                   label="Sort"
                   onChange={(event) => onSelectFieldChange(event, 'sort')}
+                  data-cy="filter-sort-select"
                 >
                   <MenuItem value="asc">ASC</MenuItem>
                   <MenuItem value="desc">DESC</MenuItem>
@@ -136,13 +142,19 @@ const BeerList = () => {
               </FormControl>
             </div>
 
-            <IconButton onClick={onFilterClear}><Clear/></IconButton>
+            <IconButton onClick={onFilterClear} data-cy="filter-clear-btn">
+              <Clear/>
+            </IconButton>
           </div>
           <List>
             {beerList.map((beer) => {
               const secondaryTitle = [beer.brewery_type, beer.city, beer.state, beer.postal_code].join(' · ');
               return (
-                <ListItemButton key={beer.id} onClick={onBeerClick.bind(this, beer.id)}>
+                <ListItemButton
+                  key={beer.id}
+                  onClick={onBeerClick.bind(this, beer.id)}
+                  data-cy="beer-list-item-btn"
+                >
                   <ListItemAvatar>
                     <Avatar>
                       <SportsBar/>
@@ -154,7 +166,10 @@ const BeerList = () => {
             })}
           </List>
           <div className={styles.listFooter}>
-            <Pagination count={pageCount} onChange={onPageChange}/>
+            <Pagination
+              count={pageCount}
+              onChange={onPageChange}
+              data-cy="beer-list-pagination" />
           </div>
         </main>
       </section>

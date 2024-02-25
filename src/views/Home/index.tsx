@@ -64,7 +64,7 @@ const Home = () => {
   };
 
   const onRemoveClick = () => {
-    const beersToRemove: Beer[] = selectedBeersToRemove.map(beerId => beerList.find(beer => beer.id === beerId)).filter(Boolean) as Beer[];
+    const beersToRemove: Beer[] = selectedBeersToRemove.map(beerId => savedList.find(beer => beer.id === beerId)).filter(Boolean) as Beer[];
     setSavedList(prevState => {
       const newState = [...prevState];
       for(const beerToRemove of beersToRemove) {
@@ -96,8 +96,19 @@ const Home = () => {
           <Paper>
             <div className={styles.listContainer}>
               <div className={styles.listHeader}>
-                <TextField label="Filter..." variant="outlined" value={filterValue} onChange={onFilterChange} />
-                <Button variant="contained" onClick={() => setLoadList(true)}>Reload list</Button>
+                <TextField
+                  label="Filter..."
+                  variant="outlined"
+                  value={filterValue}
+                  onChange={onFilterChange}
+                  data-cy="list-filter-input" />
+                <Button
+                  variant="contained"
+                  onClick={() => setLoadList(true)}
+                  data-cy="list-reload-btn"
+                >
+                  Reload list
+                </Button>
               </div>
               <ul className={styles.list}>
                 {beerList.map((beer, index) => (
@@ -105,15 +116,26 @@ const Home = () => {
                     <Checkbox
                       onClick={onBeerCheckboxAddClick.bind(this, beer.id)}
                       checked={selectedBeersToAdd.includes(beer.id)}
+                      data-cy="beer-list-chk"
                     />
-                    <Link component={RouterLink} to={`/beer/${beer.id}`}>
+                    <Link
+                      component={RouterLink}
+                      to={`/beer/${beer.id}`}
+                      data-cy="beer-list-link"
+                    >
                       {beer.name}
                     </Link>
                   </li>
                 ))}
               </ul>
               <div className={styles.listFooter}>
-                <Button variant="contained" onClick={onSaveClick.bind(this)}>Save Items</Button>
+                <Button
+                  variant="contained"
+                  onClick={onSaveClick.bind(this)}
+                  data-cy="beer-list-save-btn"
+                >
+                  Save Items
+                </Button>
               </div>
             </div>
           </Paper>
@@ -122,7 +144,12 @@ const Home = () => {
             <div className={styles.listContainer}>
               <div className={styles.listHeader}>
                 <h3>Saved items</h3>
-                <Button variant="contained" size="small" onClick={onRemoveAllItemsClicked}>
+                <Button
+                  variant="contained"
+                  size="small"
+                  onClick={onRemoveAllItemsClicked}
+                  data-cy="remove-all-items-btn"
+                >
                   Remove all items
                 </Button>
               </div>
@@ -132,8 +159,13 @@ const Home = () => {
                     <Checkbox
                       onClick={onBeerCheckboxRemoveClick.bind(this, beer.id)}
                       checked={selectedBeersToRemove.includes(beer.id)}
+                      data-cy="favorite-list-chk"
                     />
-                    <Link component={RouterLink} to={`/beer/${beer.id}`}>
+                    <Link
+                      component={RouterLink}
+                      to={`/beer/${beer.id}`}
+                      data-cy="favorite-list-link"
+                    >
                       {beer.name}
                     </Link>
                   </li>
@@ -141,7 +173,13 @@ const Home = () => {
                 {!savedList.length && <p>No saved items</p>}
               </ul>
               <div className={styles.listFooter}>
-                <Button variant="contained" onClick={onRemoveClick.bind(this)}>Remove Items</Button>
+                <Button
+                  variant="contained"
+                  onClick={onRemoveClick.bind(this)}
+                  data-cy="remove-items-btn"
+                >
+                  Remove Items
+                </Button>
               </div>
             </div>
           </Paper>
