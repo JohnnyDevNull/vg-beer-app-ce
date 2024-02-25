@@ -9,3 +9,16 @@ We will discuss the proposed solution during the interview. You should be ready 
 - Home page favourites ~ add a list of favourite beers, do not clean after page reload
 - Beer list filtering + pagination + sorting
 - Progressive Web App, offline
+
+## Run E2E Tests
+
+```
+# 1. Termin: start development server
+$ npm run start
+
+# 2. Terminal: open cypress studio
+$ npm run cypress:open
+
+# 2. Terminal: run the tests without studio
+$ npm run cypress:run
+```
