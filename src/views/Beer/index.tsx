@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Beer as IBeer } from '../../types';
+import { GoogleMapsApiKey } from './config';
 import { extractBeerParams, fetchData } from './utils';
 import { useParams } from 'react-router-dom';
 
@@ -13,7 +14,7 @@ const Beer = () => {
   const beerParams = beer ? extractBeerParams(beer) : [];
   const addressString = beerParams.join(', ');
   const beerUriString = encodeURI(addressString);
-  const mapsUrl = `https://www.google.com/maps/embed/v1/search?key=YOUR_API_KEY&q=${beerUriString}`;
+  const mapsUrl = `https://www.google.com/maps/embed/v1/search?key=${GoogleMapsApiKey}&q=${beerUriString}`;
 
   return (
     <article>
