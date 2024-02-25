@@ -1,7 +1,9 @@
+import Clear from '@mui/icons-material/Clear';
 import SportsBar from '@mui/icons-material/SportsBar';
 import {
   Avatar,
   FormControl,
+  IconButton,
   InputLabel,
   List,
   ListItemAvatar,
@@ -20,6 +22,16 @@ import styles from './BeerList.module.css';
 import { IListFilter, IMetaDataResponse } from './types';
 import { fetchData } from './utils';
 
+const initialFilter: IListFilter = {
+  name: '',
+  city: '',
+  state: '',
+  postal: '',
+  type: '',
+  sort: 'asc',
+  page: 1
+};
+
 const BeerList = () => {
   const navigate = useNavigate();
   const [beerList, setBeerList] = useState<Array<Beer>>([]);
@@ -28,15 +40,7 @@ const BeerList = () => {
     page: 1,
     per_page: 10
   });
-  const [listFilter, setListFilter] = useState<IListFilter>({
-    name: '',
-    city: '',
-    state: '',
-    postal: '',
-    type: '',
-    sort: 'asc',
-    page: 1
-  })
+  const [listFilter, setListFilter] = useState<IListFilter>({...initialFilter})
 
   const pageCount = Math.ceil(metaData.total / 10);
 
@@ -57,6 +61,10 @@ const BeerList = () => {
 
   const onSelectFieldChange = (event: SelectChangeEvent, key: string) => {
     setListFilter(prevState => ({...prevState, [key]: event.target.value}))
+  }
+
+  const onFilterClear = () => {
+    setListFilter({...initialFilter});
   }
 
   return (
@@ -127,6 +135,8 @@ const BeerList = () => {
                 </Select>
               </FormControl>
             </div>
+
+            <IconButton onClick={onFilterClear}><Clear/></IconButton>
           </div>
           <List>
             {beerList.map((beer) => {
