@@ -1,5 +1,5 @@
 import { getBeerList, getBeerMetaData } from '../../api';
-import { Beer, SORT, TYPE } from '../../types';
+import { Beer, TYPE } from '../../types';
 import handle from '../../utils/error';
 import { IListFilter, IMetaDataResponse } from './types';
 
@@ -28,7 +28,7 @@ const fetchData = (
         by_postal: by_postal.length ? by_postal : undefined,
         page,
         per_page: 10,
-        sort: sort as SORT
+        sort: `name:${sort}`
       };
 
       const dataResponse = await getBeerList(apiParams);

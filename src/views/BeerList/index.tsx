@@ -34,7 +34,7 @@ const BeerList = () => {
     state: '',
     postal: '',
     type: '',
-    sort: '',
+    sort: 'asc',
     page: 1
   })
 
