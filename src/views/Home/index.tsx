@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Beer } from '../../types';
 import styles from './Home.module.css';
-import { fetchData } from './utils';
+import { fetchData, searchData } from './utils';
 
 const Home = () => {
   const [loadList, setLoadList] = useState<Boolean>(true);
@@ -11,14 +11,21 @@ const Home = () => {
   const [savedList, setSavedList] = useState<Array<Beer>>([]);
   const [selectedBeersToAdd, setSelectedBeersToAdd] = useState<Array<Beer['id']>>([]);
   const [selectedBeersToRemove, setSelectedBeersToRemove] = useState<Array<Beer['id']>>([]);
+  const [filterValue, setFilterValue] = useState('');
 
-  // eslint-disable-next-line
   useEffect(() => {
     if (loadList) {
       fetchData.bind(this, setBeerList)();
       setLoadList(false);
     }
   }, [loadList]);
+
+  useEffect(() => {
+    if (!loadList && filterValue) {
+      const handle = setTimeout(() => searchData.bind(this, setBeerList, filterValue)(), 250);
+      return () => clearTimeout(handle);
+    }
+  }, [loadList, filterValue]);
 
   useEffect(() => {
     const savedItemsData = localStorage.getItem('savedItems');
@@ -78,6 +85,10 @@ const Home = () => {
     setSavedList([])
   }
 
+  const onFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFilterValue(event.target.value);
+  }
+
   return (
     <article>
       <section>
@@ -85,7 +96,7 @@ const Home = () => {
           <Paper>
             <div className={styles.listContainer}>
               <div className={styles.listHeader}>
-                <TextField label="Filter..." variant="outlined"/>
+                <TextField label="Filter..." variant="outlined" value={filterValue} onChange={onFilterChange} />
                 <Button variant="contained" onClick={() => setLoadList(true)}>Reload list</Button>
               </div>
               <ul className={styles.list}>

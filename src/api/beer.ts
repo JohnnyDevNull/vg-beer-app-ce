@@ -17,7 +17,7 @@ const getRandomBeerList = (size = 3) =>
 
 const searchBeerList = (query: string, isAutoComplete = false) =>
   axios.get(`${API}breweries/${isAutoComplete ? 'autocomplete' : 'search'}`, {
-    params: { query },
+    params: { query, per_page: 10 },
   });
 
 const getBeerMetaData = (params?: ApiParams) => axios.get(`${API}breweries/meta`, { params });
