@@ -10,6 +10,10 @@ We will discuss the proposed solution during the interview. You should be ready 
 - Beer list filtering + pagination + sorting
 - Progressive Web App, offline
 
+## Env Variables
+
+Create a copy of the `.env-example` file, rename it to `.env` and create and add a Google Maps Embed API key.
+
 ## Run E2E Tests
 
 ```
