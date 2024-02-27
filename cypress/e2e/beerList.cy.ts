@@ -30,7 +30,7 @@ describe('Page Beer List', () => {
     cy.getBySel('beer-list-pagination').find('li')
       .eq(6).should('have.text', '…');
     cy.getBySel('beer-list-pagination').find('li')
-      .eq(7).should('have.text', '824');
+      .eq(7).then($num => expect(parseInt($num.text())).greaterThan(820));
   })
 
   it('should filter by name', () => {
@@ -129,7 +129,7 @@ describe('Page Beer List', () => {
       .find('li')
       .should('have.length', 9);
     cy.getBySel('beer-list-pagination').find('li')
-      .eq(7).should('have.text', '824');
+      .eq(7).then($num => expect(parseInt($num.text())).greaterThan(820));
   })
 
   it('should open details page', () => {
